@@ -89,7 +89,7 @@ HOVER 2.0 --------------------
 *********************************************************************************************************/
 
 #include "application.h"
-#include "Hover.h"
+#include "firmware/hover-particle.h"
 
 // pin declarations for Hover
 int ts = 5;

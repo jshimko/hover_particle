@@ -79,7 +79,7 @@ HOVER 2.0 --------------------
 *********************************************************************************************************/
 
 #include "application.h"
-#include "Hover.h"
+#include "firmware/hover-particle.h"
 #include "neopixel/neopixel.h"
 
 SYSTEM_MODE(AUTOMATIC);
@@ -143,7 +143,7 @@ void loop(void) {
     Serial.print("Event: "); Serial.print(g.gestureType); Serial.print("\t");
     Serial.print("Gesture ID: "); Serial.print(g.gestureID,HEX); Serial.print("\t");
     Serial.print("Value: "); Serial.print(g.gestureValue,HEX); Serial.println("");
-    
+
     if (g.gestureID == 1){
         switch (g.gestureValue){
             case 0x01:
@@ -155,20 +155,20 @@ void loop(void) {
               waveRight();
               break;
             case 0x03:
-              Particle.publish("lifxup","swipeup");            
+              Particle.publish("lifxup","swipeup");
               waveDown();
               break;
             case 0x04:
-              Particle.publish("lifxdown","swipedown");            
+              Particle.publish("lifxdown","swipedown");
               waveUp();
               break;
             default:
               break;
         }
     }
-    
+
   }
-  
+
 }
 
 
@@ -176,101 +176,101 @@ void loop(void) {
 
 
 void waveUp(){
-  int brightness = 135;    
-    
+  int brightness = 135;
+
   for(uint16_t i=4; i<12; i++) {
-    
+
     brightness = (i > 7) ? 255 : 135;
-    
+
     strip.setColorDimmed(i, 0, 0, 200, brightness);
     strip.setColorDimmed(23-i, 0, 0, 200, brightness);
 
     strip.show();
     delay(delay1);
   }
-  
+
   for(uint16_t i=4; i<12; i++) {
     strip.setPixelColor(i, strip.Color(0, 0, 0));
     strip.setPixelColor(23-i, strip.Color(0, 0, 0));
-    
+
     strip.show();
     delay(delay2);
-  }    
-    
+  }
+
 }
 
 void waveDown(){
-  int brightness = 135;    
-    
+  int brightness = 135;
+
   for(uint16_t i=8; i>0; i--) {
-    
+
     brightness = (i < 4) ? 255 : 135;
-    
+
     strip.setColorDimmed(i, 0, 0, 200, brightness);
     strip.setColorDimmed(23-i, 0, 0, 200, brightness);
 
     strip.show();
     delay(delay1);
   }
-  
+
   for(uint16_t i=8; i>0; i--) {
     strip.setPixelColor(i, strip.Color(0, 0, 0));
     strip.setPixelColor(23-i, strip.Color(0, 0, 0));
-    
+
     strip.show();
     delay(delay2);
-  }    
-    
+  }
+
 }
 
 
 
 void waveRight(){
-  int brightness = 135;    
-    
+  int brightness = 135;
+
   for(uint16_t i=0; i<6; i++) {
-    
+
     brightness = (i > 2) ? 255 : 135;
-    
+
     strip.setColorDimmed(12+i, 0, 0, 200, brightness);
     strip.setColorDimmed(23-i, 0, 0, 200, brightness);
 
     strip.show();
     delay(delay1);
   }
-  
+
   for(uint16_t i=0; i<6; i++) {
     strip.setPixelColor(12+i, strip.Color(0, 0, 0));
     strip.setPixelColor(23-i, strip.Color(0, 0, 0));
-    
+
     strip.show();
     delay(delay2);
-  }    
-    
+  }
+
 }
 
 void waveLeft(){
-  int brightness = 135;    
-    
+  int brightness = 135;
+
   for(uint16_t i=0; i<6; i++) {
-    
+
     brightness = (i > 2) ? 255 : 135;
-    
+
     strip.setColorDimmed(12-i, 0, 0, 200, brightness);
     strip.setColorDimmed(i, 0, 0, 200, brightness);
 
     strip.show();
     delay(delay1);
   }
-  
+
   for(uint16_t i=0; i<6; i++) {
     strip.setPixelColor(12-i, strip.Color(0, 0, 0));
     strip.setPixelColor(i, strip.Color(0, 0, 0));
-    
+
     strip.show();
     delay(delay2);
-  }    
-    
+  }
+
 }
 
 // Input a value 0 to 255 to get a color value.

@@ -22,7 +22,7 @@
 #  ===========================================================================*/
 
 #include "application.h"
-#include "Hover.h"
+#include "hover-particle.h"
 
 Hover::Hover(uint8_t ts, uint8_t rst, uint8_t gestmode, uint8_t touchmode, uint8_t tapmode, uint8_t posmode) {
   _i2caddr = 0x42;
@@ -44,10 +44,10 @@ void Hover::begin() {
 
 	/*disable autocal for smoother operation*/
 	uint8_t autoCal[] = {0x10, 0x00, 0x00, 0xA2, 0x80, 0x00 , 0x00, 0x00, 0x06, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF};
-    Wire.beginTransmission(_i2caddr); 
-    Wire.write(autoCal, 16);             
-    Wire.endTransmission();    
-	
+    Wire.beginTransmission(_i2caddr);
+    Wire.write(autoCal, 16);
+    Wire.endTransmission();
+
 	Serial.println("Hover is ready");
 }
 
