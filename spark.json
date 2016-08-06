@@ -1,0 +1,7 @@
+{
+  "name": "hover-particle",
+  "author": "Jeremy Shimko <jeremy.shimko@gmail.com>",
+  "license": "MIT",
+  "version": "0.0.1",
+  "description": "Use a Hover sensor with a Particle"
+}
